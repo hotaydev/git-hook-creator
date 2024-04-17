@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-import yargs from 'yargs/yargs';
-import { hideBin } from 'yargs/helpers';
-import open from './utils/open_url';
-import MainCli from './cli';
 import { log } from '@clack/prompts';
+import { hideBin } from 'yargs/helpers';
+import yargs from 'yargs/yargs';
+import MainCli from './cli';
+import open from './utils/open_url';
 
 const yargsParameters = hideBin(process.argv);
 
