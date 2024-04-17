@@ -1,0 +1,58 @@
+{
+  "name": "git-hook-creator",
+  "version": "0.1.0",
+  "description": "Git hook creator",
+  "license": "MIT",
+  "homepage": "https://hotaydev/git-hook-creator",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hotaydev/git-hook-creator.git",
+    "directory": "app"
+  },
+  "bugs": {
+    "url": "https://github.com/hotaydev/git-hook-creator/issues"
+  },
+  "author": "TaylorHo <taylor@hotay.dev>",
+  "contributors": [
+    "TaylorHo <taylor@hotay.dev>"
+  ],
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "format": "eslint --fix src/",
+    "prepare": "git init && git config --local core.hooksPath .hooks/",
+    "prebuild": "rm -rf dist/",
+    "prepack": "npm run build",
+    "build": "tsc",
+    "dev": "ts-node src/index.ts"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.7.0",
+    "yargs": "^17.7.2"
+  },
+  "files": [
+    "dist/",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "create-hook": "dist/index.js"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@types/node": "^20.12.7",
+    "@types/yargs": "^17.0.32",
+    "@typescript-eslint/eslint-plugin": "^7.6.0",
+    "@typescript-eslint/parser": "^7.6.0",
+    "eslint": "^8.57.0",
+    "semantic-release": "^23.0.8",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
