@@ -3,6 +3,7 @@ import yargs from 'yargs/yargs';
 import { hideBin } from 'yargs/helpers';
 import open from './utils/open_url';
 import MainCli from './cli';
+import { log } from '@clack/prompts';
 
 const yargsParameters = hideBin(process.argv);
 
@@ -12,7 +13,8 @@ yargs(yargsParameters)
   .usage('npx $0')
   .wrap(yargs(yargsParameters).terminalWidth())
   .command('changelog', 'Open the tool changelog', () => {}, () => {
-    open('https://github.com/hotaydev/git-hook-creator');
+    log.success('Changelog URL: https://github.com/hotaydev/git-hook-creator/releases');
+    open('https://github.com/hotaydev/git-hook-creator/releases');
   })
   .command('*', 'Create a new git hook', () => {}, () => {
     new MainCli().prompt();
