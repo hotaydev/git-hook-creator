@@ -13,7 +13,7 @@ export default class MainCli {
 
     const hook: string = (await p.select({
       message: 'What hook do you want to create?',
-      options: GitHooks.map((hook) => {
+      options: GitHooks.map(hook => {
         return {
           value: hook.hook,
           label: hook.hook,
@@ -23,15 +23,18 @@ export default class MainCli {
       maxItems: 8,
     })) as string;
 
-    const { scripts } = await this.getPackageJsonContent();
+    const packageJson = await this.getPackageJson();
+    const { scripts } = await this.getPackageJsonContent(packageJson);
     let scriptsChoosed: string[] = [];
 
     if (!scripts) {
-      p.log.info('We couldn\'t find any script in your package.json.\nEnsure you have a script there so we cna include it into your git hook.');
+      p.log.info(
+        'We couldn\'t find any script in your package.json.\nEnsure you have a script there so we cna include it into your git hook.'
+      );
     } else {
       scriptsChoosed = (await p.multiselect({
         message: `Which scripts you want to execute on the ${hook} hook?`,
-        options: Object.keys(scripts).map((key) => ({
+        options: Object.keys(scripts).map(key => ({
           label: key,
           value: key,
         })),
@@ -39,10 +42,12 @@ export default class MainCli {
     }
 
     // TODO: In the future we can choose which of these points need to be shown, based on the current user configuration.
-    p.log.info(`For it to be done we will:\n- Create a .hooks folder if it doesn't already exist\n- Edit your prepare script in package.json\n- Create the .hooks/${hook} file`);
+    p.log.info(
+      `For it to be done we will:\n- Create a .hooks folder if it doesn't already exist\n- Edit your prepare script in package.json\n- Create the .hooks/${hook} file`
+    );
 
     const okayToContinue = await p.confirm({
-      message: 'Do you want to apply changes now?'
+      message: 'Do you want to apply changes now?',
     });
 
     if (!okayToContinue) {
@@ -57,7 +62,13 @@ export default class MainCli {
     p.outro('Your hooks were added in .hooks folder.');
   }
 
-  private async getPackageJsonContent(): Promise<Record<string, any>> {
+  private async getPackageJsonContent(
+    packageJson: string
+  ): Promise<Record<string, any>> {
+    return JSON.parse(packageJson);
+  }
+
+  private async getPackageJson(): Promise<string> {
     const file = await readFile(this.packageJsonPath, {
       encoding: 'utf-8',
     });
@@ -68,8 +79,7 @@ export default class MainCli {
       );
       process.exit(1);
     }
-
-    return JSON.parse(file);
+    return file;
   }
 
   private async createDotHooksFolder() {
@@ -82,33 +92,41 @@ export default class MainCli {
 
   private async createPrepareScript() {
     let needToWriteFile = false;
-    let packageJson = await this.getPackageJsonContent();
-    const scripts = packageJson.scripts;
+    const packageJson = await this.getPackageJson();
+    let packageJsonContent = await this.getPackageJsonContent(packageJson);
+    const scripts = packageJsonContent.scripts;
 
     if (!scripts) {
-      packageJson.scripts = {};
+      packageJsonContent.scripts = {};
     }
 
-    if (!packageJson.scripts.prepare) {
+    if (!packageJsonContent.scripts.prepare) {
       needToWriteFile = true;
-      packageJson.scripts.prepare = this.gitHooksScript;
+      packageJsonContent.scripts.prepare = this.gitHooksScript;
     } else if (
-      !packageJson.scripts.prepare.includes(
-        this.gitHooksScript
-      )
+      !packageJsonContent.scripts.prepare.includes(this.gitHooksScript)
     ) {
       needToWriteFile = true;
-      packageJson.scripts.prepare =
-        packageJson.scripts.prepare +
-        ' && ' + this.gitHooksScript;
+      packageJsonContent.scripts.prepare =
+        packageJsonContent.scripts.prepare + ' && ' + this.gitHooksScript;
     }
 
     if (needToWriteFile)
       await writeFile(
         this.packageJsonPath,
-        JSON.stringify(packageJson, null, 2)
+        JSON.stringify(
+          packageJsonContent,
+          null,
+          this.getIndentation(packageJson)
+        )
       );
-    // TODO: adjust this writeFile to match the user's identation instead of assuming it's 2
+  }
+
+  private getIndentation(packageJson: string) {
+    // capturing the first line break followed by empty spaces
+    const match = /\n(\s+)/.exec(packageJson);
+    // return either the captured emptyspaces or default
+    return match ? match[1] : '  ';
   }
 
   private async createHookFile(hook: string, scripts: string[]) {
@@ -125,22 +143,28 @@ export default class MainCli {
 
       // TODO: add options to choose what to add/remove from the original hook file
       const willContinue = await p.confirm({
-        message: `The file .hooks/${hook} already exists. Do you want to overwrite it?`
+        message: `The file .hooks/${hook} already exists. Do you want to overwrite it?`,
       });
 
       if (!willContinue) {
         p.outro('Okay, we will not touch your file system ;)');
         process.exit(0);
       }
-
     } catch (error) {
-      file = '' ;
+      file = '';
     }
 
     const lines: string[] = [];
-    if (file) lines.push(...(file.split('\n').filter((line) => (line !== firstline) && (line !== lastline) && line !== '')));
+    if (file)
+      lines.push(
+        ...file
+          .split('\n')
+          .filter(
+            line => line !== firstline && line !== lastline && line !== ''
+          )
+      );
 
-    scripts.forEach((script) => {
+    scripts.forEach(script => {
       lines.push(`npm run ${script}`);
     });
 
