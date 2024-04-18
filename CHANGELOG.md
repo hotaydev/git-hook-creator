@@ -1,3 +1,11 @@
+## [1.0.1](https://github.com/hotaydev/git-hook-creator/compare/v1.0.0...v1.0.1) (2024-04-18)
+
+
+### Bug Fixes
+
+* minimal release misconfigurations ([1830dd4](https://github.com/hotaydev/git-hook-creator/commit/1830dd4e165c54036bfd9cb836c6a777bd24c0a5))
+* usage options from yargs ([aacdd23](https://github.com/hotaydev/git-hook-creator/commit/aacdd23f80b3bbf7c9a8856f11e2a970731a9193))
+
 # 1.0.0 (2024-04-18)
 
 
