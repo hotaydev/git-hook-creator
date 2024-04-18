@@ -43,7 +43,13 @@
   "bin": {
     "create-hook": "dist/index.js"
   },
-  "keywords": [],
+  "keywords": [
+    "git-hooks",
+    "git",
+    "hooks",
+    "cli",
+    "dev-tool"
+  ],
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
