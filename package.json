@@ -14,7 +14,8 @@
   },
   "author": "TaylorHo <taylor@hotay.dev>",
   "contributors": [
-    "TaylorHo <taylor@hotay.dev>"
+    "TaylorHo <taylor@hotay.dev>",
+    "Enzo Moraes <enzomoraes12@hotmail.com>"
   ],
   "engines": {
     "node": ">=16"
