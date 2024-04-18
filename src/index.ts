@@ -9,8 +9,7 @@ const yargsParameters = hideBin(process.argv);
 
 yargs(yargsParameters)
   .scriptName('create-hook')
-  .usage('$0')
-  .usage('npx $0')
+  .usage('Usage: $0 <command> [options]')
   .wrap(yargs(yargsParameters).terminalWidth())
   .command('changelog', 'Open the tool changelog', () => {}, () => {
     log.success('Changelog URL: https://github.com/hotaydev/git-hook-creator/releases');
