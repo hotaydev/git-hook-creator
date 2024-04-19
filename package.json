@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "description": "Git hook creator",
   "license": "MIT",
-  "homepage": "https://hotaydev/git-hook-creator",
+  "homepage": "https://github.com/hotaydev/git-hook-creator",
   "repository": {
     "type": "git",
     "url": "https://github.com/hotaydev/git-hook-creator.git",
