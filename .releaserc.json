@@ -30,7 +30,7 @@
       "@semantic-release/github",
       {
         "assets": [
-          "tarball/git-hook-creator-*.tgz",
+          "tarball/git-hook-creator.tgz",
           "CHANGELOG.md"
         ]
       }

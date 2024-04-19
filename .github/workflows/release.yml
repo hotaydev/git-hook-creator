@@ -44,7 +44,7 @@ jobs:
         run: |
           mkdir tarball
           npm pack
-          mv git-hook-creator-*.tgz ./tarball
+          mv git-hook-creator-*.tgz ./tarball/git-hook-creator.tgz
 
       - name: Release
         env:
