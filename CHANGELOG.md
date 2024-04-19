@@ -1,3 +1,16 @@
+# [1.1.0](https://github.com/hotaydev/git-hook-creator/compare/v1.0.1...v1.1.0) (2024-04-19)
+
+
+### Bug Fixes
+
+* misspell ([8f40952](https://github.com/hotaydev/git-hook-creator/commit/8f4095261b36a71cf1acba398ca2b29e55e663c6))
+
+
+### Features
+
+* added cancelation handler ([62b1d8b](https://github.com/hotaydev/git-hook-creator/commit/62b1d8b87d2ec6793c3a660890830f678549f893))
+* getting file identation ([92b1882](https://github.com/hotaydev/git-hook-creator/commit/92b1882a8b564695bb27a23a4db5c5d4c4a33fa9))
+
 ## [1.0.1](https://github.com/hotaydev/git-hook-creator/compare/v1.0.0...v1.0.1) (2024-04-18)
 
 
