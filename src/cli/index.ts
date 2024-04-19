@@ -29,7 +29,7 @@ export default class MainCli {
     let scriptsChoosed: string[] = [];
 
     if (!scripts) {
-      p.log.info('We couldn\'t find any script in your package.json.\nEnsure you have a script there so we cna include it into your git hook.');
+      p.log.info('We couldn\'t find any script in your package.json.\nEnsure you have a script there so we can include it into your git hook.');
     } else {
       scriptsChoosed = (await p.multiselect({
         message: `Which scripts you want to execute on the ${hook} hook?`,
