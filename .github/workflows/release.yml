@@ -40,6 +40,12 @@ jobs:
       - name: Check for untrusted dependencies
         run: npm audit signatures
 
+      - name: Create the tarball
+        run: |
+          mkdir tarball
+          npm pack
+          mv git-hook-creator-*.tgz ./tarball
+
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
