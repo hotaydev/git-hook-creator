@@ -2,6 +2,7 @@ import * as p from '@clack/prompts';
 import path from 'node:path';
 import { readFile, writeFile, access, mkdir } from 'node:fs/promises';
 import { GitHooks } from '../models/git_hooks';
+import handleCancel from '../utils/handle_cancel';
 
 export default class MainCli {
   private gitHooksScript = 'git config --local core.hooksPath .hooks/';
@@ -22,6 +23,7 @@ export default class MainCli {
       }),
       maxItems: 8,
     })) as string;
+    handleCancel(hook);
 
     const { scripts } = await this.getPackageJsonContent();
     let scriptsChoosed: string[] = [];
@@ -36,6 +38,7 @@ export default class MainCli {
           value: key,
         })),
       })) as string[];
+      handleCancel(scriptsChoosed);
     }
 
     // TODO: In the future we can choose which of these points need to be shown, based on the current user configuration.
@@ -44,6 +47,7 @@ export default class MainCli {
     const okayToContinue = await p.confirm({
       message: 'Do you want to apply changes now?'
     });
+    handleCancel(okayToContinue);
 
     if (!okayToContinue) {
       p.outro('Okay, we will not touch your file system ;)');
@@ -127,6 +131,7 @@ export default class MainCli {
       const willContinue = await p.confirm({
         message: `The file .hooks/${hook} already exists. Do you want to overwrite it?`
       });
+      handleCancel(willContinue);
 
       if (!willContinue) {
         p.outro('Okay, we will not touch your file system ;)');
