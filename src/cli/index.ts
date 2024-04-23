@@ -1,6 +1,6 @@
 import * as p from '@clack/prompts';
 import path from 'node:path';
-import { readFile, writeFile, access, mkdir } from 'node:fs/promises';
+import { readFile, writeFile, access, mkdir, chmod } from 'node:fs/promises';
 import { GitHooks } from '../models/git_hooks';
 import handleCancel from '../utils/handle_cancel';
 
@@ -61,6 +61,7 @@ export default class MainCli {
     await this.createDotHooksFolder();
     await this.createPrepareScript();
     await this.createHookFile(hook, scriptsChoosed);
+    await this.makeHookFileExecutable(hook);
 
     p.outro('Your hooks were added in .hooks folder.');
   }
@@ -181,5 +182,16 @@ export default class MainCli {
     ];
 
     await writeFile(hookPath, finalFile.join('\n'));
+  }
+
+  private async makeHookFileExecutable(hook: string) {
+    const hookPath = path.join(path.dirname(''), '.hooks', hook);
+    const executablePermissions = 0o755;
+    try {
+      await chmod(hookPath, executablePermissions);
+    } catch (error) {
+      p.log.error('We couldn\'t set the file as executable.\nYou can manually do it by running:\n\nchmod +x .hooks/*.sh');
+      process.exit(1);
+    }
   }
 }
