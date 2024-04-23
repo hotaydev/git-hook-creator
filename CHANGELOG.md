@@ -1,3 +1,17 @@
+# [1.2.0](https://github.com/hotaydev/git-hook-creator/compare/v1.1.0...v1.2.0) (2024-04-23)
+
+
+### Bug Fixes
+
+* async use of the scripts ([c8cb8c9](https://github.com/hotaydev/git-hook-creator/commit/c8cb8c92bd9bd9c1face0f6cc3f2fe3f362bef7b))
+* making hooks executable ([1ff58f1](https://github.com/hotaydev/git-hook-creator/commit/1ff58f1a7d7cab91091083c5d8d55a49dd702c95))
+* release tarball name ([853f3ac](https://github.com/hotaydev/git-hook-creator/commit/853f3aca4141f7d3c7f5e26a7b314639a89ec1f7))
+
+
+### Features
+
+* showing just scripts that aren't pre/post anything ([05320d8](https://github.com/hotaydev/git-hook-creator/commit/05320d876d3ef99105d46faee28930881b437803))
+
 # [1.1.0](https://github.com/hotaydev/git-hook-creator/compare/v1.0.1...v1.1.0) (2024-04-19)
 
 
