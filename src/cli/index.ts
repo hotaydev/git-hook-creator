@@ -32,6 +32,7 @@ export default class MainCli {
     if (!scripts) {
       p.log.info('We couldn\'t find any script in your package.json.\nEnsure you have a script there so we can include it into your git hook.');
     } else {
+      // TODO: We can remove scripts from the "pre", "post" cycles [https://docs.npmjs.com/cli/v6/using-npm/scripts#pre--post-scripts]
       scriptsChoosed = (await p.multiselect({
         message: `Which scripts you want to execute on the ${hook} hook?`,
         options: Object.keys(scripts).map(key => ({
@@ -57,9 +58,9 @@ export default class MainCli {
       process.exit(0);
     }
 
-    this.createDotHooksFolder();
-    this.createPrepareScript();
-    this.createHookFile(hook, scriptsChoosed);
+    await this.createDotHooksFolder();
+    await this.createPrepareScript();
+    await this.createHookFile(hook, scriptsChoosed);
 
     p.outro('Your hooks were added in .hooks folder.');
   }
