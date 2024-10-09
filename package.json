@@ -1,6 +1,6 @@
 {
   "name": "git-hook-creator",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Git hook creator",
   "license": "MIT",
   "homepage": "https://github.com/hotaydev/git-hook-creator",

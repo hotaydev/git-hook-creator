@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/hotaydev/git-hook-creator/compare/v1.2.0...v1.2.1) (2024-10-09)
+
+
+### Bug Fixes
+
+* removing tarball ([1637f8b](https://github.com/hotaydev/git-hook-creator/commit/1637f8bfeaf3a65dfbf9b98ae0bf464933f4ded4))
+
 # [1.2.0](https://github.com/hotaydev/git-hook-creator/compare/v1.1.0...v1.2.0) (2024-04-23)
 
 
