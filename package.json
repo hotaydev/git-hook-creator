@@ -21,7 +21,7 @@
     "node": ">=16"
   },
   "scripts": {
-    "format": "eslint --fix src/",
+    "format": "npx @biomejs/biome check --write ./src/",
     "prepare": "git init && git config --local core.hooksPath .hooks/",
     "prebuild": "rm -rf dist/",
     "prepack": "npm run build",
@@ -51,15 +51,13 @@
     "dev-tool"
   ],
   "devDependencies": {
+    "@biomejs/biome": "^1.9.3",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "@types/node": "^20.12.7",
-    "@types/yargs": "^17.0.32",
-    "@typescript-eslint/eslint-plugin": "^7.6.0",
-    "@typescript-eslint/parser": "^7.6.0",
-    "eslint": "^8.57.0",
-    "semantic-release": "^23.0.8",
+    "@types/node": "^22.7.5",
+    "@types/yargs": "^17.0.33",
+    "semantic-release": "^24.1.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.6.3"
   }
 }
