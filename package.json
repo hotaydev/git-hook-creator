@@ -51,12 +51,12 @@
     "dev-tool"
   ],
   "devDependencies": {
-    "@biomejs/biome": "^1.9.3",
+    "@biomejs/biome": "^1.9.4",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "@types/node": "^22.7.5",
+    "@types/node": "^22.8.1",
     "@types/yargs": "^17.0.33",
-    "semantic-release": "^24.1.2",
+    "semantic-release": "^24.2.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
   }
